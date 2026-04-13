@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestro Album</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+    rel="stylesheet">
+  <script type="module" crossorigin src="./assets/index-BKpJEc0o.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Bq5I96nv.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="hero-header">
+    <div class="hero-content">
+      <div class="hearts-row">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fcb6c4"
+          stroke="#fcb6c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+        </svg>
+        <span class="suptitle">TE AMO</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fcb6c4"
+          stroke="#fcb6c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+        </svg>
+      </div>
+
+      <h1 id="main-title" class="main-title">Nuestro Album</h1>
+      <p class="subtitle">"Cada foto, un momento hermoso contigo"</p>
+      <p class="counter"><span id="memories-count">0</span> recuerdos guardados</p>
+
+      <button id="open-modal-btn" class="upload-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        Subir una Foto
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="gallery-container">
+    <div id="photos-grid" class="photos-grid">
+      <!-- Photo cards injected via JS -->
+    </div>
+    <div id="main-loader" class="main-loader">
+      <div class="spinner"></div>
+      <p>Cargando hermosos recuerdos...</p>
+    </div>
+  </main>
+
+  <!-- Modal Upload -->
+  <div id="upload-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h2>Nueva Foto</h2>
+          <p>Agrega un nuevo recuerdo a tu album</p>
+        </div>
+        <button id="close-modal-btn" class="icon-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="drop-zone" class="drop-zone">
+          <input type="file" id="file-input" accept="image/*" hidden />
+          <div id="preview-container" class="preview-container hidden">
+            <img id="image-preview" src="" alt="Preview" />
+            <button type="button" id="remove-image-btn" class="remove-image-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div id="upload-prompt" class="upload-prompt">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+              stroke="#fcb6c4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <p class="drop-title">Arrastra tu foto aqui</p>
+            <p class="drop-subtitle">o haz clic para seleccionar</p>
+            <p class="drop-info">JPG, PNG, WEBP, GIF</p>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="#fcb6c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 7 4 4 20 4 20 7"></polyline>
+            <line x1="9" y1="20" x2="15" y2="20"></line>
+            <line x1="12" y1="4" x2="12" y2="20"></line>
+          </svg>
+          <input type="text" id="title-input" placeholder="Titulo del recuerdo (opcional)" />
+        </div>
+
+        <div class="input-group textarea-group">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="#fcb6c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <textarea id="desc-input" placeholder="Escribe algo especial sobre este momento... (opcional)"
+            rows="3"></textarea>
+        </div>
+
+        <div class="input-group">
+          <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="#fcb6c4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <input type="date" id="date-input" />
+        </div>
+
+        <div id="upload-progress-container" class="progress-bar-container hidden">
+          <div id="upload-progress" class="progress-bar"></div>
+        </div>
+        <p id="upload-status" class="upload-status"></p>
+
+        <button id="submit-btn" class="submit-btn" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Guardar recuerdo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Image Viewer -->
+  <div id="image-viewer" class="viewer-overlay hidden">
+    <button id="close-viewer-btn" class="icon-btn close-viewer" title="Cerrar vista">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <img id="viewer-img" src="" alt="Vista completa" />
+  </div>
+
+  <!-- Template for Photo Card -->
+  <template id="photo-card-template">
+    <div class="photo-card">
+      <div class="card-image-wrapper">
+        <div class="image-loader skeleton"></div>
+        <img class="card-img" src="" alt="Photo" loading="lazy"
+          onload="this.previousElementSibling.style.display='none'" />
+        <div class="card-overlay"></div>
+        <p class="card-date">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span class="date-text"></span>
+        </p>
+        <button class="delete-btn" title="Eliminar foto">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="card-info">
+        <div class="card-text">
+          <h3 class="card-title"></h3>
+          <p class="card-desc"></p>
+        </div>
+      </div>
+    </div>
+  </template>
+
+</body>
+
+</html>
